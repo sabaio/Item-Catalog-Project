@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+
+{% block title %}Item Catalog{% endblock title %}
+
+{% block content %}
+{% include "headers.html" %}
+{% include "flash.html" %}
+
+<!-- Page Content -->
+<section id="catalog" class="section">
+
+    <div class="container">
+
+        <div class="row">
+
+            {% include "categories.html" %}
+                    <a href = "{{url_for('createItem')}}">Create</a>
+            <div class="col-md-9">
+                <h4 class="padding-bottom-19">Latest Items</h4>
+                {% for i in items %}
+                <div class="thumbnail">
+                    <div class="caption-full">
+                        <img class="img-responsive img-center" src="{{ i.picture }}" alt="{{ i.name }}" height="200px" width="150px">
+                    </div>
+                    <a href = "{{url_for('viewItem', category_name = i.category.name, item_name = i.name)}}">
+                        <h4>{{ items.name }}</h4>
+                        <h6 class="pull-right">Last update: {{ i.date.strftime("%d-%b-%Y at %I:%M %p") }}</h6>
+                        <h6>({{ category_name }})</h6>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.section -->
+{% endblock %}
